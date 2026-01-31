@@ -1,0 +1,11 @@
+name: rust-redis-parser
+
+services: {}
+
+agents:
+  claude:
+    provider: claude-code
+    command: claude
+  codex:
+    provider: codex
+    command: codex
