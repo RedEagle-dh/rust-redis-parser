@@ -1,8 +1,10 @@
 mod config;
 mod error;
 mod proxy;
+mod resp;
 mod server;
 mod stats;
+mod tls;
 mod upstream;
 
 use anyhow::Result;

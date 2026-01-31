@@ -19,10 +19,10 @@ A lightweight TLS proxy for Redis connections written in Rust. It sits between R
 
 ## Installation
 
-Install [bun](https://bun.com/docs/installation) for running test without needing redis dependencies:
+Install [bun](https://bun.sh/docs/installation) for running test without needing redis dependencies:
 
 ```bash
-curl -fsSL https://bun.com/install | bash
+curl -fsSL https://bun.sh/install | bash
 ```
 
 Optional: Build redis proxy
@@ -47,13 +47,13 @@ cargo run -- --no-tls
 In a new terminal, run bench.ts or test.ts:
 
 ```bash
-[ENV_VAR="here"] bun run bench.ts
+[ENV_VAR="here"] bun run scripts/bench.ts
 ```
 
 Env vars for bench.ts:
 
 ```sh
-PROXY_URL="redis://localhost:1637"
+PROXY_URL="redis://localhost:16379"
 NUM_CLIENTS=10
 OPS_PER_CLIENT=1000
 ```
@@ -119,6 +119,28 @@ Set the `RUST_LOG` environment variable to control log verbosity:
 ```bash
 RUST_LOG=debug redis-tls-proxy --no-tls
 RUST_LOG=redis_tls_proxy=trace redis-tls-proxy --no-tls
+```
+
+## Project Structure
+
+```
+redis-tls-proxy/
+├── src/
+│   ├── main.rs       # Entry point and orchestration
+│   ├── config.rs     # CLI configuration
+│   ├── error.rs      # Error types
+│   ├── resp.rs       # RESP protocol parsing
+│   ├── tls.rs        # TLS utilities
+│   ├── server.rs     # TCP/TLS listener
+│   ├── upstream.rs   # Upstream connection
+│   ├── proxy.rs      # Bidirectional forwarding
+│   └── stats.rs      # Command statistics
+├── scripts/
+│   ├── test.ts       # Functional tests
+│   └── bench.ts      # Performance benchmarks
+├── Cargo.toml
+├── docker-compose.yml
+└── README.md
 ```
 
 ## Architecture
